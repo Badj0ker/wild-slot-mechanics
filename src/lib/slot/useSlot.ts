@@ -18,6 +18,13 @@ import {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const STORE_KEY = "madcrow.state.v1";
+const INITIAL_GRID: Grid = [
+  ["chalice", "skull", "raven", "lantern", "gravedigger"],
+  ["raven", "lantern", "chalice", "crowking", "skull"],
+  ["gravedigger", "chalice", "skull", "raven", "lantern"],
+  ["lantern", "raven", "crowking", "skull", "chalice"],
+  ["skull", "gravedigger", "lantern", "chalice", "raven"],
+];
 
 export interface DuelState {
   reels: number[];
@@ -28,7 +35,7 @@ export interface DuelState {
 export function useSlot() {
   const [balance, setBalance] = useState(START_BALANCE);
   const [betIndex, setBetIndex] = useState(2);
-  const [grid, setGrid] = useState<Grid>(() => blankGrid());
+  const [grid, setGrid] = useState<Grid>(() => INITIAL_GRID.map((column) => [...column]));
   const [spinningReels, setSpinningReels] = useState<number[]>([]);
   const [wildReels, setWildReels] = useState<number[]>([]);
   const [multipliers, setMultipliers] = useState<Record<number, number>>({});
@@ -49,6 +56,7 @@ export function useSlot() {
 
   // restore / persist
   useEffect(() => {
+    setGrid(blankGrid());
     try {
       const raw = localStorage.getItem(STORE_KEY);
       if (raw) {
