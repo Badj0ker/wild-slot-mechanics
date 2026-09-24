@@ -19,6 +19,8 @@ const BLUR_SET: SymbolId[] = [
   "crowking",
 ];
 
+const FALLBACK_BLUR_SYMBOL: SymbolId = "raven";
+
 function Symbol({ id, win }: { id: SymbolId; win: boolean }) {
   return (
     <img
@@ -66,7 +68,7 @@ export function SlotGrid({
                     {spinning ? (
                       <div className="anim-reel h-full w-full">
                         <Symbol
-                          id={BLUR_SET[(reel * 3 + row) % BLUR_SET.length]!}
+                          id={BLUR_SET[(reel * 3 + row) % BLUR_SET.length] ?? FALLBACK_BLUR_SYMBOL}
                           win={false}
                         />
                       </div>
@@ -84,8 +86,8 @@ export function SlotGrid({
             </div>
 
             {isWild && multipliers[reel] ? (
-              <div className="pointer-events-none absolute inset-x-0 bottom-1 flex justify-center">
-                <span className="anim-rise font-display text-gold-shine text-3xl sm:text-5xl drop-shadow-[0_2px_8px_oklch(0_0_0/0.9)]">
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background/10">
+                <span className="anim-rise font-display text-gold-shine text-4xl sm:text-6xl drop-shadow-[0_2px_8px_oklch(0_0_0/0.9)]">
                   {multipliers[reel]}X
                 </span>
               </div>

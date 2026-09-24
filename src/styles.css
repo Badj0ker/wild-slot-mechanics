@@ -220,6 +220,32 @@
   }
 }
 
+@keyframes duel-shot {
+  0%,
+  38% {
+    transform: scale(0.8);
+    opacity: 0.35;
+  }
+  45% {
+    transform: scale(1.45);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin-ring {
+  0%,
+  100% {
+    box-shadow: 0 0 16px var(--glow), inset 0 0 10px oklch(0.95 0.08 95 / 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--glow), inset 0 0 18px oklch(0.95 0.08 95 / 0.38);
+  }
+}
+
 .anim-reel {
   animation: reel-blur 0.14s linear infinite alternate;
   filter: blur(3px);
@@ -244,4 +270,25 @@
 }
 .anim-fog {
   animation: fog-drift 18s ease-in-out infinite alternate;
+}
+.duel-shot {
+  animation: duel-shot 0.7s ease-out both;
+}
+.spin-button:not(:disabled) {
+  animation: spin-ring 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-reel,
+  .anim-drop,
+  .anim-win,
+  .anim-flash,
+  .anim-rise,
+  .anim-duelist-l,
+  .anim-duelist-r,
+  .anim-fog,
+  .duel-shot,
+  .spin-button {
+    animation: none;
+  }
 }
