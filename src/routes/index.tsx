@@ -7,7 +7,7 @@ import { DuelOverlay } from "@/components/slot/DuelOverlay";
 import { Paytable } from "@/components/slot/Paytable";
 import { SlotGrid } from "@/components/slot/SlotGrid";
 import { Button } from "@/components/ui/button";
-import { BUY_COST } from "@/lib/slot/config";
+import { BET_STEPS, BUY_COST } from "@/lib/slot/config";
 import { useSlot } from "@/lib/slot/useSlot";
 
 export const Route = createFileRoute("/")({
@@ -150,7 +150,7 @@ function Index() {
                 variant="ghost"
                 size="icon"
                 onClick={() => game.changeBet(1)}
-                disabled={game.busy || game.betIndex === 8}
+                disabled={game.busy || game.betIndex === BET_STEPS.length - 1}
                 aria-label="Tét növelése"
               >
                 <Plus />
