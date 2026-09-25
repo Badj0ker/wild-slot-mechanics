@@ -1,4 +1,5 @@
 import { SYMBOL_IMAGES } from "@/lib/slot/symbols";
+import wildColumn from "@/assets/sym-wild-column.png";
 import type { Grid } from "@/lib/slot/engine";
 import type { SymbolId } from "@/lib/slot/config";
 
@@ -72,7 +73,7 @@ export function SlotGrid({
                           win={false}
                         />
                       </div>
-                    ) : (
+                    ) : isWild ? null : (
                       <div
                         key={sym + String(row)}
                         className="anim-drop h-full w-full"
@@ -86,8 +87,13 @@ export function SlotGrid({
             </div>
 
             {isWild && multipliers[reel] ? (
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background/10">
-                <span className="anim-rise font-display text-gold-shine text-4xl sm:text-6xl drop-shadow-[0_2px_8px_oklch(0_0_0/0.9)]">
+              <div className="anim-wild-expand pointer-events-none absolute inset-0 flex items-center justify-center">
+                <img
+                  src={wildColumn}
+                  alt="Kiterjedt Mad Crow WILD"
+                  className="h-full w-full object-contain"
+                />
+                <span className="wild-multiplier anim-rise font-display text-gold-shine">
                   {multipliers[reel]}X
                 </span>
               </div>

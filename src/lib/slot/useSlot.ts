@@ -104,10 +104,10 @@ export function useSlot() {
         await sleep(250);
         setDuel({ reels: result.vsReels, multipliers: result.multipliers, revealed: 0 });
         for (let i = 0; i < result.vsReels.length; i++) {
-          await sleep(620);
+          await sleep(950);
           setDuel((d) => (d ? { ...d, revealed: i + 1 } : d));
         }
-        await sleep(650);
+        await sleep(750);
         setDuel(null);
         finalGrid = applyWilds(result.grid, result.vsReels);
         setGrid(finalGrid);

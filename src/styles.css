@@ -120,14 +120,27 @@
   }
 
   .wild-column {
-    background-image: linear-gradient(
-      180deg,
-      oklch(0.6 0.2 300 / 0.35),
-      oklch(0.78 0.13 190 / 0.3)
-    );
+    background-image: linear-gradient(180deg, oklch(0.2 0.08 295), oklch(0.12 0.05 285));
     box-shadow:
-      inset 0 0 40px oklch(0.6 0.2 300 / 0.55),
-      0 0 30px oklch(0.6 0.2 300 / 0.4);
+      inset 0 0 40px oklch(0.62 0.3 305 / 0.6),
+      0 0 30px oklch(0.62 0.3 305 / 0.55);
+  }
+
+  .duel-reel-active {
+    background: oklch(0.12 0.05 285 / 0.94);
+    box-shadow:
+      inset 0 0 32px oklch(0.62 0.3 305 / 0.7),
+      0 0 26px oklch(0.62 0.3 305 / 0.7);
+  }
+
+  .wild-multiplier {
+    position: absolute;
+    left: 50%;
+    bottom: 7%;
+    transform: translateX(-50%);
+    font-size: clamp(1.8rem, 5vw, 4.5rem);
+    line-height: 1;
+    filter: drop-shadow(0 3px 4px oklch(0 0 0 / 0.95));
   }
 }
 
@@ -236,6 +249,29 @@
   }
 }
 
+@keyframes wild-expand {
+  0% {
+    transform: scaleY(0.08) scaleX(0.7);
+    opacity: 0;
+    filter: brightness(2.2);
+  }
+  55% {
+    transform: scaleY(1.04) scaleX(1.03);
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+@keyframes duel-vs-pulse {
+  0%, 100% { transform: scale(0.9); filter: brightness(1); }
+  50% { transform: scale(1.2); filter: brightness(1.7); }
+}
+
 @keyframes spin-ring {
   0%,
   100% {
@@ -274,6 +310,12 @@
 .duel-shot {
   animation: duel-shot 0.7s ease-out both;
 }
+.duel-vs {
+  animation: duel-vs-pulse 0.5s ease-in-out infinite;
+}
+.anim-wild-expand {
+  animation: wild-expand 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+}
 .spin-button:not(:disabled) {
   animation: spin-ring 1.8s ease-in-out infinite;
 }
@@ -288,6 +330,8 @@
   .anim-duelist-r,
   .anim-fog,
   .duel-shot,
+    .duel-vs,
+    .anim-wild-expand,
   .spin-button {
     animation: none;
   }
