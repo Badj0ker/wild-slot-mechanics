@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Symbol sprite strips use separate landing and win frame ranges with discrete CSS playback; keep intermediate poses in the asset so slowing playback never slides between frames.
