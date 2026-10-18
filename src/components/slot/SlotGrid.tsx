@@ -1,5 +1,6 @@
 import { SYMBOL_IMAGES } from "@/lib/slot/symbols";
 import wildColumn from "@/assets/sym-wild-column.png";
+import skullSprite from "@/assets/sym-skull-sprite.png";
 import type { Grid } from "@/lib/slot/engine";
 import type { SymbolId } from "@/lib/slot/config";
 
@@ -22,7 +23,22 @@ const BLUR_SET: SymbolId[] = [
 
 const FALLBACK_BLUR_SYMBOL: SymbolId = "raven";
 
-function Symbol({ id, win }: { id: SymbolId; win: boolean }) {
+const SPRITES: Partial<Record<SymbolId, string>> = { skull: skullSprite };
+
+function Symbol({ id, win, land }: { id: SymbolId; win: boolean; land?: boolean }) {
+  const sprite = SPRITES[id];
+  if (sprite) {
+    return (
+      <div
+        role="img"
+        aria-label={id}
+        className={`sprite-sym h-full w-full drop-shadow-[0_4px_10px_oklch(0_0_0/0.6)] ${
+          win ? "sprite-hit" : land ? "sprite-land" : ""
+        }`}
+        style={{ backgroundImage: `url(${sprite})` }}
+      />
+    );
+  }
   return (
     <img
       src={SYMBOL_IMAGES[id]}
@@ -78,7 +94,7 @@ export function SlotGrid({
                         key={sym + String(row)}
                         className="anim-drop h-full w-full"
                       >
-                        <Symbol id={sym} win={win} />
+                        <Symbol id={sym} win={win} land />
                       </div>
                     )}
                   </div>
