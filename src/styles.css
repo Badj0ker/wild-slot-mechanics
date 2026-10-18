@@ -320,26 +320,25 @@
   animation: spin-ring 1.8s ease-in-out infinite;
 }
 
-/* Sprite sheet symbols: 3 frames horizontally (idle, landing, hit) */
+/* Skull strip: 8 landing frames followed by 8 win frames. */
 .sprite-sym {
-  background-size: 300% 100%;
+  background-size: 1600% 100%;
   background-repeat: no-repeat;
   background-position: 0% 0;
 }
 .sprite-land {
-  animation: sprite-land 0.85s linear both;
+  animation: sprite-land 2.4s steps(7, end) both;
 }
 .sprite-hit {
-  animation: sprite-hit 1.5s linear infinite, pulse-win 1.3s ease-in-out infinite;
+  animation: sprite-hit 3.2s steps(7, end) infinite;
 }
 @keyframes sprite-land {
-  0%, 12% { background-position: 0% 0; transform: translateY(-14%); }
-  13%, 62% { background-position: 50% 0; transform: translateY(0) scaleY(0.9); }
-  63%, 100% { background-position: 0% 0; transform: none; }
+  from { background-position: 0% 0; }
+  to { background-position: 46.666667% 0; }
 }
 @keyframes sprite-hit {
-  0%, 70% { background-position: 100% 0; }
-  71%, 100% { background-position: 0% 0; }
+  from { background-position: 53.333333% 0; }
+  to { background-position: 100% 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sprite-land, .sprite-hit { animation: none; }
